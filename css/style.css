@@ -1,0 +1,102 @@
+html, body {
+	margin: 0px;
+	height: 100%;
+	font-family: sans-serif;
+}
+header, footer {
+	background-color: #B4D479;
+	height: 100px;
+}
+footer {
+	margin-top: 200px;
+}
+h1 {
+	margin-top: 0px;
+	text-align: center;
+	padding-top: 30px;
+	font-family: sans-serif;
+}
+#mainContent {
+	margin: 0 auto -100px;
+	padding-top: 20px;
+	min-height: 100%;
+	width: 70%;
+}
+#searchButton {
+	cursor: pointer;
+	background: #B4D479;
+}
+#filter {
+	text-align: center;
+}
+.listing {
+	width: 700px;
+	height: 150px;
+	border: solid 1px #CCC;
+	clear: left;
+	margin: 5px auto;
+	padding: 10px;
+}
+.listing:hover{
+	background-color: #EEE;
+}
+.listing img {
+	float: left;
+	height: 150px;
+}
+.home-image {
+	float: left;
+	width: 250px;
+	text-decoration: none;
+	margin-right: 10px;
+}
+
+input {
+  font-size: 22px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#errorMessage {
+	color: #FF0000;
+	font-size: 18px;
+	display: none;
+	width: 700px;
+	text-align: center;
+}
+
+#summary {
+	display: none;
+	width: 700px;
+	text-align: center;
+}
+
+.price {
+	font-size: 26px;
+	float: right;
+}
+.address {
+	font-weight: bold;
+}
+.home-type {
+	margin-top: 50px;
+}
+.description {
+	display: none;
+}
+.details {
+	font-size: 20px;
+    float: right;
+    border: solid 1px #FFF;
+    border-radius: 5px;
+    padding: 5px;
+    background: #B4D479;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+.page {
+	cursor: pointer;
+	color: #0769AD;
+	text-decoration: underline;
+}
