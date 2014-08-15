@@ -114,7 +114,7 @@
             <option value="20000000">$20M</option>        
         </select>
         <select name="beds">
-            <option value="1">Bedrooms</option>
+            <option value="0">Bedrooms</option>
             <option value="1">1 Bedroom</option>
             <option value="2">2 Bedrooms</option>
             <option value="3">3 Bedrooms</option>
@@ -145,7 +145,7 @@
             <div><%= home.address.city %> <%= home.address.zip %></div> 
             
             <div class="home-type"><%= home.type %> </div>
-            <div><%= home.bed %> beds, <%= (home.bath.hasOwnProperty('total')) ? home.bath.total : '?' %> baths</div>
+            <div><%= home.bed %> beds, <%= (home.hasOwnProperty('bath') && home.bath.hasOwnProperty('total')) ? home.bath.total : '?' %> baths</div>
             <div class="description" data-mlsId="<%= home.mlsId %>"><%= home.description %></div>
             <a href="<%= home.url %>" target="_blank" class="details">Details</a>
         </div>
