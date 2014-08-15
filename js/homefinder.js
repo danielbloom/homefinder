@@ -1,5 +1,5 @@
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 $(document).ready(function() {
@@ -28,42 +28,39 @@ $(document).ready(function() {
         // remove any current messages
         $errorMessage.hide();
         $summary.hide();
-        $pagination.hide()
+        $pagination.hide();
 
         // retrieve listing data
         $.ajax({
-            url: 'search.php',
+            url: 'search',
             data: $('#filter').serialize(),
             dataType: 'json',
             success: function (data) {
                 if (data.status.code == 200) {
                     var homeTemplate = $('#homeTemplate').html(),
-                        $container = $("#container");
-                    console.log(data.data.meta.totalMatched);
-                    console.log(data.data.meta.totalPages);
-                    console.log(data.data.meta.searchResultsUrl);
+                        $container = $('#container');
+
                     $('#summary').text(data.data.meta.totalMatched + ' listings found').show();
                     $container.html('');
                     $container.html(_.template(homeTemplate,{listings: data.data.listings}));
-                    $("img").unveil();
+                    $('img').unveil();
 
                     // pagination
                     if (data.data.meta.totalPages > 1) {
                         var paginationText = 'Page: ';
                         for (i = 1; i <= data.data.meta.totalPages; i++) {
-                            paginationText += "<span class='page' data-page=" + i + ">" + i + "</span> ";
+                            paginationText += '<span class="page" data-page=' + i + '>' + i + '</span> ';
                             if (i >= 10) {
                                 i += 9;
                             }
-                        };
+                        }
                         $('#pagination').html(paginationText).show();
-                        console.log(data.data.meta.currentPage);
-                        console.log($('.pages[data-page="'+ data.data.meta.currentPage+'"]'));
-                        $('.page[data-page="'+ data.data.meta.currentPage+'"]').css('font-weight', 'bold')
+                        $('.page[data-page="'+ data.data.meta.currentPage+'"]').css('font-weight', 'bold');
                     }
                 } else {
                     // something went wrong
-                    $errorMessage.text(data.status.errorStack[0].message).show();
+                    errorText = (data.status.code == 606) ? 'Please be more specific by including a state e.g. New Haven, CT' : data.status.errorStack[0].message;
+                    $errorMessage.text(errorText).show();
                 }
             },
             error: function() {
@@ -75,68 +72,9 @@ $(document).ready(function() {
     
 });
 
+// make clicking on a page number trigger a refresh
 $(document).on('click','.page',function(){
-    var val = $(this).data('page');
-    console.log(val);
-    $('input[name="page"]').val(val);
-    $("#searchButton").trigger('click');
+    var page = $(this).data('page');
+    $('input[name="page"]').val(page);
+    $('#searchButton').trigger('click');
 });
-
-
-
-/**
- * jQuery Unveil
- * A very lightweight jQuery plugin to lazy load images
- * http://luis-almeida.github.com/unveil
- *
- * Licensed under the MIT license.
- * Copyright 2013 Luís Almeida
- * https://github.com/luis-almeida
- */
-
-;(function($) {
-
-  $.fn.unveil = function(threshold, callback) {
-
-    var $w = $(window),
-        th = threshold || 0,
-        retina = window.devicePixelRatio > 1,
-        attrib = retina? "data-src-retina" : "data-src",
-        images = this,
-        loaded;
-
-    this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
-      if (source) {
-        this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
-      }
-    });
-
-    function unveil() {
-      var inview = images.filter(function() {
-        var $e = $(this);
-        if ($e.is(":hidden")) return;
-
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
-
-        return eb >= wt - th && et <= wb + th;
-      });
-
-      loaded = inview.trigger("unveil");
-      images = images.not(loaded);
-    }
-
-    $w.on("scroll.unveil resize.unveil lookup.unveil", unveil);
-
-    unveil();
-
-    return this;
-
-  };
-
-})(window.jQuery || window.Zepto);

@@ -16,6 +16,9 @@ h1 {
 	padding-top: 30px;
 	font-family: sans-serif;
 }
+select {
+	border-image-outset: 20px;
+}
 #mainContent {
 	margin: 0 auto -100px;
 	padding-top: 20px;
@@ -50,13 +53,11 @@ h1 {
 	text-decoration: none;
 	margin-right: 10px;
 }
-
 input {
   font-size: 22px;
   border-radius: 5px;
   padding: 5px;
 }
-
 #errorMessage {
 	color: #FF0000;
 	font-size: 18px;
@@ -64,13 +65,11 @@ input {
 	width: 700px;
 	text-align: center;
 }
-
-#summary {
+#summary, #pagination {
 	display: none;
 	width: 700px;
 	text-align: center;
 }
-
 .price {
 	font-size: 26px;
 	float: right;

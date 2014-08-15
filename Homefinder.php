@@ -2,15 +2,20 @@
 
 
 /**
-* 
+* Homefinder class
+*
+*  Makes request to Homefinder API
 */
 class Homefinder
 {
-	
-	// function __construct(argument)
-	// {
-	// 	# code...
-	// }
+    
+    /**
+    *   Makes api call to Homefinder
+    *
+    *   @param string $method (e.g. search, areaSuggestions etc)
+    *   @param mixed $params array of params
+    *   @return string (json response from API)
+    */
     public function apiCall($method, $params)
     {
         $params = '?apikey=4mmpby8b72aa9y6sbx47xsgq&' . http_build_query($params);
